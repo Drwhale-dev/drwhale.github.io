@@ -1,238 +1,621 @@
 
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dr Whale - Liquidity Safety & Transparency</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Whale - Liquidity Safety & Transparency</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<!-- Fonts & Icons -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #050505;
+            --text-main: #f0f0f0;
+            --text-muted: #a0a0a0;
+            --accent-gold: #c5a059;
+            --accent-gold-dim: rgba(197, 160, 89, 0.2);
+            --accent-blue: #14f195; /* Solana Glow */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Raleway', sans-serif;
+        }
 
-<style>
-:root {
-    --bg-dark: #050505;
-    --text-main: #f0f0f0;
-    --text-muted: #a0a0a0;
-    --accent-gold: #c5a059;
-    --accent-blue: #14f195;
-    --glass-bg: rgba(255,255,255,0.03);
-    --glass-border: rgba(255,255,255,0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
-    --font-title: 'Cinzel', serif;
-    --font-body: 'Raleway', sans-serif;
-}
-* { margin:0; padding:0; box-sizing:border-box; outline:none; }
-body { background-color: var(--bg-dark); color: var(--text-main); font-family: var(--font-body); line-height:1.6; overflow-x:hidden; min-height:100vh; position:relative; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
 
-/* Particles Background */
-#particles-js { position:fixed; width:100%; height:100%; top:0; left:0; z-index:-1; background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 80%); }
+        /* --- 2. PARTICLES CONTAINER --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Behind everything */
+            background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 80%);
+        }
 
-/* Typography */
-h1,h2,h3 { font-family: var(--font-title); color:white; text-transform:uppercase; letter-spacing:3px; }
-h1 { font-size:4rem; margin-bottom:0.5rem; background: linear-gradient(45deg,#ffffff,#c5a059,#ffffff); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: shineText 5s linear infinite; text-align:center; }
-.subtitle { text-align:center; font-size:1.1rem; color:var(--accent-gold); margin-bottom:2rem; font-weight:300; letter-spacing:2px; opacity:0.9; }
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
 
-/* Layout */
-.container { max-width:900px; margin:0 auto; padding:4rem 2rem; position:relative; z-index:1; }
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
 
-/* Cards / Glassmorphism */
-.card { background: var(--glass-bg); backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%); border:1px solid var(--glass-border); border-radius:16px; padding:2.5rem; box-shadow: var(--glass-shadow); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease; position: relative; overflow:hidden; }
-.card:hover { transform: translateY(-8px); border-color: rgba(197,160,89,0.4); box-shadow:0 15px 40px rgba(197,160,89,0.1); }
-.card::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent); transition:0.5s; pointer-events:none; }
-.card:hover::before { left:100%; }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ffffff, #c5a059, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 5s linear infinite;
+            text-align: center;
+        }
 
-.card-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
 
-/* Header image */
-.header-image { max-width:450px; width:100%; border-radius:20px; margin-bottom:2rem; box-shadow:0 0 50px rgba(197,160,89,0.15); transition: transform 0.5s ease; }
-.header-image:hover { transform: scale(1.02); }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            position: relative;
+        }
 
-/* Contract Address Box */
-.ca-wrapper { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border:1px solid var(--accent-gold); border-radius:12px; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:700px; margin:2rem auto; box-shadow:0 0 20px rgba(197,160,89,0.1); transition:0.3s; cursor:pointer; }
-.ca-wrapper:hover { box-shadow:0 0 30px rgba(197,160,89,0.3); background: rgba(255,255,255,0.08); }
-.ca-text { font-family:'Courier New', monospace; font-size:0.95rem; color:#fff; word-break: break-all; text-align:left; }
-.copy-btn { background: var(--accent-gold); color:#000; border:none; padding:0.7rem 1.5rem; font-family: var(--font-title); font-weight:700; border-radius:8px; cursor:pointer; transition:all 0.3s ease; }
-.copy-btn:hover { background:#fff; transform:scale(1.05); }
-.copy-btn:active { transform:scale(0.95); }
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
 
-/* BUY button */
-.buy-btn { display:inline-block; margin-top:2rem; padding:1.2rem 4rem; background: linear-gradient(135deg, #a08035 0%, #d4b06a 50%, #a08035 100%); background-size:200% auto; color:#050505; text-decoration:none; font-family:var(--font-title); font-weight:700; font-size:1.4rem; border-radius:50px; box-shadow:0 0 30px rgba(197,160,89,0.4); border:1px solid rgba(255,255,255,0.3); animation: shineBtn 3s infinite linear; transition: transform 0.3s; }
-.buy-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow:0 0 50px rgba(197,160,89,0.7); color:#fff; }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        strong { color: #fff; font-weight: 600; }
 
-/* Trust Proof Accordion */
-details.trust-item { background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); margin-bottom:1rem; border-radius:8px; overflow:hidden; transition:all 0.3s ease; cursor:pointer; }
-details.trust-item:hover { background: rgba(255,255,255,0.05); border-color: var(--accent-gold); }
-details.trust-item[open] { background: rgba(197,160,89,0.05); border-color: var(--accent-gold); }
-summary { padding:1.2rem; font-family: var(--font-title); font-weight:600; list-style:none; display:flex; align-items:center; justify-content:space-between; }
-summary::after { content:'+'; font-size:1.5rem; color: var(--accent-gold); transition: transform 0.3s; }
-details[open] summary::after { content:'-'; transform: rotate(180deg); }
-.details-content { padding:0 1.2rem 1.2rem 1.2rem; color: var(--text-muted); font-size:0.95rem; border-top:1px solid rgba(255,255,255,0.05); margin-top:0.5rem; padding-top:1rem; animation:fadeIn 0.5s ease; }
-.check-green { color: var(--accent-blue); margin-right:10px; }
+        /* --- 3. GLASSMORPHISM CARDS --- */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        border-color 0.3s ease, 
+                        box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* Token Data */
-.token-data li { display:flex; justify-content:space-between; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,0.05); }
-.token-data li:last-child { border-bottom:none; }
-.bar-bg { background: rgba(255,255,255,0.1); height:10px; border-radius:5px; overflow:hidden; margin-top:5px; position:relative; }
-.bar-fill { height:100%; border-radius:5px; background: linear-gradient(90deg, #c5a059, #e0c878, #c5a059); background-size:200% auto; box-shadow:0 0 8px #c5a059; transition:width 1.5s ease-out; animation: shineBar 2s linear infinite; }
-@keyframes shineBar { 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
+        /* Hover Effect: Glow border & Lift */
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(197, 160, 89, 0.4);
+            box-shadow: 0 15px 40px rgba(197, 160, 89, 0.1);
+        }
 
-/* Footer */
-.footer { margin-top:6rem; padding:3rem 0; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); border-top:1px solid rgba(255,255,255,0.05); text-align:center; backdrop-filter:blur(5px); }
-.social-links { display:flex; justify-content:center; gap:2rem; margin-bottom:2rem; }
-.social-links a { color: var(--text-muted); font-size:1.5rem; transition: all 0.3s; }
-.social-links a:hover { color: var(--accent-gold); transform:translateY(-3px); text-shadow:0 0 10px var(--accent-gold); }
+        /* Subtle inner gradient shine on hover */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transition: 0.5s;
+            pointer-events: none;
+        }
+        .card:hover::before { left: 100%; }
 
-/* Animations */
-@keyframes shineBtn {0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
-@keyframes shineText {0%{background-position:0% 50%;}100%{background-position:200% 50%;}}
-@keyframes fadeIn {from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);}}
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
 
-.gold-text { color: var(--accent-gold); }
-.text-center { text-align:center; }
-.mt-2 { margin-top:2rem; }
-</style>
+        /* --- HEADER ELEMENTS --- */
+        .header-image {
+            max-width: 450px;
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.15);
+            transition: transform 0.5s ease;
+        }
+        .header-image:hover { transform: scale(1.02); }
+
+        /* --- CONTRACT BOX --- */
+        .ca-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 700px;
+            margin: 2rem auto;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.1);
+            transition: 0.3s;
+        }
+        
+        .ca-wrapper:hover {
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .ca-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            color: #fff;
+            word-break: break-all;
+            text-align: left;
+        }
+
+        .copy-btn {
+            background: var(--accent-gold);
+            color: #000;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-family: var(--font-title);
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover { background: #fff; transform: scale(1.05); }
+        .copy-btn:active { transform: scale(0.95); }
+
+        /* --- BUY BUTTON (SHIMMER) --- */
+        .buy-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.2rem 4rem;
+            background: linear-gradient(135deg, #a08035 0%, #d4b06a 50%, #a08035 100%);
+            background-size: 200% auto;
+            color: #050505;
+            text-decoration: none;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+            animation: shineBtn 3s infinite linear;
+            transition: transform 0.3s;
+        }
+        .buy-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.7);
+            color: #fff;
+        }
+
+        /* --- 8. INTERACTIVE TRUST PROOF (ACCORDION) --- */
+        details.trust-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        details.trust-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-gold);
+        }
+
+        details.trust-item[open] {
+            background: rgba(197, 160, 89, 0.05);
+            border-color: var(--accent-gold);
+        }
+
+        summary {
+            padding: 1.2rem;
+            font-family: var(--font-title);
+            font-weight: 600;
+            list-style: none; /* Hide default triangle */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Custom Icon for Summary */
+        summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            transition: transform 0.3s;
+        }
+        
+        details[open] summary::after {
+            content: '-';
+            transform: rotate(180deg);
+        }
+
+        .details-content {
+            padding: 0 1.2rem 1.2rem 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 0.5rem;
+            padding-top: 1rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .check-green { color: var(--accent-blue); margin-right: 10px; }
+
+        /* --- TOKENOMICS & LISTS --- */
+        .token-data li {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .token-data li:last-child { border-bottom: none; }
+        
+        .bar-bg {
+            background: rgba(255,255,255,0.1);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+        .bar-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            box-shadow: 0 0 10px var(--accent-gold);
+            width: 0; /* JS Animation or Keyframe handled inline style */
+        }
+
+        /* --- 6. FOOTER --- */
+        .footer {
+            margin-top: 6rem;
+            padding: 3rem 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-gold);
+            transform: translateY(-3px);
+            text-shadow: 0 0 10px var(--accent-gold);
+        }
+
+        .footer p { font-size: 0.8rem; opacity: 0.6; margin-top: 1rem; }
+
+        /* --- ANIMATIONS KEYFRAMES --- */
+        @keyframes shineBtn {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        @keyframes shineText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* UTILS */
+        .gold-text { color: var(--accent-gold); }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 2rem; }
+        
+        a.link-arrow {
+            color: var(--accent-gold);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        a.link-arrow:hover { letter-spacing: 1px; color: #fff; }
+        a.link-arrow i { margin-left: 5px; font-size: 0.8rem; }
+
+    </style>
 </head>
 <body>
 
-<audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
-<div id="particles-js"></div>
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
 
-<div class="container">
+    <div id="particles-js"></div>
 
-    <!-- Header Video & Title -->
-    <div class="section text-center" data-aos="fade-down" data-aos-duration="1000">
-        <video class="header-image" autoplay loop muted playsinline>
-            <source src="https://drwhale-dev.github.io/1768454578561.mp4" type="video/mp4">
-        </video>
-        <h1>Dr Whale</h1>
-        <p class="subtitle">Liquidity Safety &bull; Transparency &bull; Sustainability</p>
-        <p style="max-width:600px;margin:0 auto 2rem auto;">
-            Reduce avoidable risk through clear structure and verifiable on-chain mechanisms. Pure DeFi, no gimmicks.
-        </p>
+    <div class="container">
+        
+        <div class="section text-center" data-aos="fade-down" data-aos-duration="1000">
+            <video class="header-image" autoplay loop muted playsinline>
+                <source src="https://drwhale-dev.github.io/1768454578561.mp4" type="video/mp4">
+            </video>
+            
+            <h1>Dr Whale</h1>
+            <p class="subtitle">Liquidity Safety &bull; Transparency &bull; Sustainability</p>
+            
+            <p style="max-width: 600px; margin: 0 auto 2rem auto;">
+                Reduce avoidable risk through clear structure and verifiable on-chain mechanisms. Pure DeFi, no gimmicks.
+            </p>
 
-        <!-- Contract Address -->
-        <div class="ca-wrapper" onclick="copyAddress(); playClick();">
+            <div class="ca-wrapper" onclick="copyAddress(); playClick();">
+                <div>
+                    <div style="font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 5px;">OFFICIAL SOLANA CONTRACT</div>
+                    <span class="ca-text" id="contractAddress">GANTI_DENGAN_ADDRESS_SOLANA_ANDA_DISINI</span>
+                </div>
+                <button class="copy-btn">COPY</button>
+            </div>
+
+            <a href="https://pump.fun" target="_blank" class="buy-btn" onmouseenter="playClick()">
+                BUY NOW
+            </a>
+        </div>
+
+        <div style="height: 4rem;"></div>
+
+        <div class="card-grid" data-aos="fade-up">
+            <div class="card">
+                <h3><i class="fas fa-drafting-compass gold-text"></i> Design Approach</h3>
+                <br>
+                <ul style="padding-left: 1.2rem; color: var(--text-muted);">
+                    <li>Fixed supply</li>
+                    <li>Permanently removed liquidity control</li>
+                    <li>Minimal token mechanics</li>
+                    <li>Fully verifiable on-chain data</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-network-wired gold-text"></i> Network</h3>
+                <br>
+                <p><strong>Blockchain:</strong> <span style="color: var(--accent-blue)">Solana</span></p>
+                <p>Chosen for high throughput, low transaction costs, and mature infrastructure.</p>
+            </div>
+        </div>
+
+        <div class="mt-2"></div>
+
+        <h2 data-aos="fade-right">Trust Proof</h2>
+        <div class="card-grid" data-aos="fade-up">
             <div>
-                <div style="font-size:0.7rem;color:var(--accent-gold);letter-spacing:1px;margin-bottom:5px;">OFFICIAL SOLANA CONTRACT</div>
-                <span class="ca-text" id="contractAddress">GANTI_DENGAN_ADDRESS_SOLANA_ANDA_DISINI</span>
-            </div>
-            <button class="copy-btn">COPY</button>
-        </div>
-
-        <a href="https://pump.fun" target="_blank" class="buy-btn" onmouseenter="playClick()">BUY NOW</a>
-    </div>
-
-    <!-- Design & Network Cards -->
-    <div class="card-grid" data-aos="fade-up">
-        <div class="card">
-            <h3><i class="fas fa-drafting-compass gold-text"></i> Design Approach</h3><br>
-            <ul style="padding-left:1.2rem;color:var(--text-muted);">
-                <li>Fixed supply</li>
-                <li>Permanently removed liquidity control</li>
-                <li>Minimal token mechanics</li>
-                <li>Fully verifiable on-chain data</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h3><i class="fas fa-network-wired gold-text"></i> Network</h3><br>
-            <p><strong>Blockchain:</strong> <span style="color: var(--accent-blue)">Solana</span></p>
-            <p>Chosen for high throughput, low transaction costs, and mature infrastructure.</p>
-        </div>
-    </div>
-
-    <!-- Trust Proof -->
-    <h2 data-aos="fade-right">Trust Proof</h2>
-    <div class="card-grid" data-aos="fade-up">
-        <div>
-            <details class="trust-item" onclick="playClick()">
-                <summary><span class="check-green">✔</span> No Creator Liquidity</summary>
-                <div class="details-content">
-                    Liquidity is automatically created and managed by the Pump.fun protocol. The creator receives 0 LP tokens and cannot rug pull liquidity.
-                </div>
-            </details>
-
-            <details class="trust-item" onclick="playClick()">
-                <summary><span class="check-green">✔</span> Contract Verified</summary>
-                <div class="details-content">
-                    Token mint and parameters are publicly verifiable on Solana explorer. No hidden functions.
-                    <br><a href="#" class="link-arrow">View on Solscan <i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </details>
-
-            <details class="trust-item" onclick="playClick()">
-                <summary><span class="check-green">✔</span> Mint Disabled</summary>
-                <div class="details-content">
-                    Fixed supply of 1 Billion. No additional tokens can ever be minted, preventing inflation attacks.
-                </div>
-            </details>
-        </div>
-        <div class="card">
-            <h3>Scope & Intent</h3><br>
-            <p><strong>Intended as:</strong> A long-term, low-complexity on-chain asset.</p>
-            <p><strong>Not:</strong> A get-rich-quick scheme or guaranteed investment.</p>
-            <div style="border-left:3px solid var(--accent-gold); padding-left:1rem; margin-top:1rem;">
-                <em style="color:#ccc;font-size:0.9rem;">"Simple is the ultimate sophistication."</em>
-            </div>
-        </div>
-    </div>
-
-    <!-- Token Data & Allocation -->
-    <h2 data-aos="fade-right">Token Data</h2>
-    <div class="card-grid" data-aos="zoom-in-up">
-        <div class="card">
-            <ul class="token-data">
-                <li><span>Name</span> <strong>Dr Whale</strong></li>
-                <li><span>Symbol</span> <strong>DRW</strong></li>
-                <li><span>Supply</span> <strong>1,000,000,000</strong></li>
-                <li><span>Type</span> <strong>Fixed / No Tax</strong></li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3 class="text-center gold-text">Tokenomics Overview</h3>
-            <p class="text-center" style="color: var(--text-muted); font-size:0.9rem;">Visualized allocation & live stats for Dr Whale token.</p>
-
-            <!-- Pie Chart -->
-            <canvas id="allocationChart" style="max-width:350px;margin:2rem auto;display:block;"></canvas>
-
-            <!-- Gradient Animated Bars -->
-            <div style="margin-top:2rem;">
-                <div class="alloc-item">
-                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:5px;">
-                        <span>Liquidity Pool</span><span class="gold-text">90%</span>
+                 <details class="trust-item" onclick="playClick()">
+                    <summary><span class="check-green">✔</span> No Creator Liquidity</summary>
+                    <div class="details-content">
+                        Liquidity is automatically created and managed by the Pump.fun protocol. The creator receives 0 LP tokens and cannot rug pull liquidity.
                     </div>
-                    <div class="bar-bg" data-info="Locked on Pump.fun protocol for 90 days">
-                        <div class="bar-fill" style="width:90%;"></div>
+                </details>
+
+                <details class="trust-item" onclick="playClick()">
+                    <summary><span class="check-green">✔</span> Contract Verified</summary>
+                    <div class="details-content">
+                        Token mint and parameters are publicly verifiable on Solana explorer. No hidden functions.
+                        <br>
+                        <a href="#" class="link-arrow">View on Solscan <i class="fas fa-external-link-alt"></i></a>
                     </div>
-                </div>
-                <div class="alloc-item">
-                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:5px;">
-                        <span>Community / Marketing</span><span>5%</span>
+                </details>
+
+                <details class="trust-item" onclick="playClick()">
+                    <summary><span class="check-green">✔</span> Mint Disabled</summary>
+                    <div class="details-content">
+                        Fixed supply of 1 Billion. No additional tokens can ever be minted, preventing inflation attacks.
                     </div>
-                    <div class="bar-bg" data-info="Used for community rewards & marketing initiatives">
-                        <div class="bar-fill" style="width:5%;"></div>
-                    </div>
-                </div>
-                <div class="alloc-item">
-                    <div style="display:flex;justify-content:space-between;font-size:0.9rem;margin-bottom:5px;">
-                        <span>Development</span><span>5%</span>
-                    </div>
-                    <div class="bar-bg" data-info="Reserved for development & ecosystem growth">
-                        <div class="bar-fill" style="width:5%;"></div>
-                    </div>
-                </div>
+                </details>
             </div>
 
-            <!-- Animated Counters -->
-            <div class="card-grid mt-2" style="text-align:center;margin-top:2rem;">
-                <div class="card" style="padding:1.5rem;">
-                    <h3><span class="counter" data-target="1000000000">0</span></h3>
-                    <p>Total Supply</p>
+            <div class="card">
+                <h3>Scope & Intent</h3>
+                <br>
+                <p><strong>Intended as:</strong> A long-term, low-complexity on-chain asset.</p>
+                <p><strong>Not:</strong> A get-rich-quick scheme or guaranteed investment.</p>
+                <div style="border-left: 3px solid var(--accent-gold); padding-left: 1rem; margin-top: 1rem;">
+                    <em style="color: #ccc; font-size: 0.9rem;">"Simple is the ultimate sophistication."</em>
                 </div>
-                <div class="card" style="padding:1.5rem;">
-                    <h3><span class="counter" data-target="1500">0</span>+</h3>
-                    <p>Holders</p
+            </div>
+        </div>
+
+        <div class="mt-2"></div>
+
+        <h2 data-aos="fade-right">Token Data</h2>
+        <div class="card-grid" data-aos="zoom-in-up">
+            
+            <div class="card">
+                <ul class="token-data">
+                    <li><span>Name</span> <strong>Dr Whale</strong></li>
+                    <li><span>Symbol</span> <strong>DRW</strong></li>
+                    <li><span>Supply</span> <strong>1,000,000,000</strong></li>
+                    <li><span>Type</span> <strong>Fixed / No Tax</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Allocation</h3>
+                <br>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                        <span>Liquidity Pool</span> <span class="gold-text">90%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 90%; transition: width 2s ease-out;" data-aos="slide-right"></div></div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                        <span>Community / Marketing</span> <span>5%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 5%;" data-aos="slide-right" data-aos-delay="200"></div></div>
+                </div>
+
+                 <div>
+                    <div style="display:flex; justify-content:space-between; font-size:0.9rem;">
+                        <span>Development</span> <span>5%</span>
+                    </div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 5%;" data-aos="slide-right" data-aos-delay="400"></div></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-2"></div>
+
+        <div class="card" data-aos="fade-up" style="text-align: center; border-color: rgba(197, 160, 89, 0.3);">
+            <h3 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-muted);">
+                <i class="fas fa-exclamation-triangle gold-text"></i> Risk Notice
+            </h3>
+            <p style="font-size: 0.9rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
+                Dr Whale does not eliminate market risk. Price volatility remains possible. 
+                The project focuses only on reducing structural and control-related risks, not on price guarantees. 
+                Participation decisions should be based on independent assessment of on-chain data.
+            </p>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" target="_blank" title="Twitter/X"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" title="Solscan"><i class="fas fa-cube"></i></a>
+                <a href="#" target="_blank" title="Pump.fun"><i class="fas fa-rocket"></i></a>
+            </div>
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Dr Whale</h3>
+            <p>Cryptocurrency involves high risk. Invest responsibly.</p>
+            <p>&copy; 2026 Dr Whale Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // 1. Initialize AOS (Scroll Animations)
+        AOS.init({
+            offset: 100,
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+
+        // 2. Initialize Particles.js (Subtle Gold/Dust Effect)
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#c5a059" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 2, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#c5a059",
+                    "opacity": 0.1,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1, /* Slow movement */
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "bubble" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "bubble": { "distance": 200, "size": 4, "duration": 2, "opacity": 0.6 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // 3. Copy Function
+        function copyAddress() {
+            var copyText = document.getElementById("contractAddress");
+            var originalText = copyText.innerText;
+            navigator.clipboard.writeText(originalText);
+            
+            var btn = document.querySelector(".copy-btn");
+            var originalBtnText = btn.innerText;
+            
+            btn.innerText = "COPIED!";
+            btn.style.background = "#fff";
+            
+            setTimeout(function(){
+                btn.innerText = originalBtnText;
+                btn.style.background = "#c5a059";
+            }, 2000);
+        }
+
+        // 4. Subtle Sound Effect (Optional)
+        function playClick() {
+            var audio = document.getElementById("clickSound");
+            audio.volume = 0.2; // Keep it very low volume
+            audio.currentTime = 0;
+            audio.play().catch(e => console.log("Audio play blocked by browser policy")); 
+        }
+    </script>
+</body>
+</html>
