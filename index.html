@@ -62,10 +62,10 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: var(--font-title);
             color: white;
-            letter-spacing: 3px;
+            letter-spacing: 1px;
         }
 
         h2, h3 {
@@ -151,6 +151,20 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+        }
+
+        /* --- WHITEPAPER SECTION STYLES --- */
+        .whitepaper-box {
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .whitepaper-title {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            font-family: var(--font-title);
         }
 
         /* --- HEADER ELEMENTS --- */
@@ -408,7 +422,7 @@
             <div class="ca-wrapper" onclick="copyAddress(); playClick();">
                 <div>
                     <div style="font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 5px;">OFFICIAL SOLANA CONTRACT</div>
-                    <span class="ca-text" id="contractAddress">GANTI_DENGAN_ADDRESS_SOLANA_ANDA_DISINI</span>
+                    <span class="ca-text" id="contractAddress">REPLACE_WITH_YOUR_SOLANA_ADDRESS</span>
                 </div>
                 <button class="copy-btn">COPY</button>
             </div>
@@ -420,23 +434,37 @@
 
         <div style="height: 4rem;"></div>
 
-        <div class="card-grid" data-aos="fade-up">
-            <div class="card">
-                <h3><i class="fas fa-drafting-compass gold-text"></i> Design Approach</h3>
-                <br>
-                <ul style="padding-left: 1.2rem; color: var(--text-muted);">
-                    <li>Fixed supply</li>
-                    <li>Permanently removed liquidity control</li>
-                    <li>Minimal token mechanics</li>
-                    <li>Fully verifiable on-chain data</li>
+        <h2 data-aos="fade-right">Litepaper</h2>
+        <div class="card" data-aos="fade-up">
+            
+            <div class="whitepaper-box">
+                <span class="whitepaper-title">1. Introduction / Vision</span>
+                <p>
+                    Dr Whale is a Solana token designed to minimize structural risk. Our goal is not to promise profit, but to ensure transparency, risk control, and long-term sustainability.
+                    <br>
+                    <em>"Reduce avoidable risk through clear structure and verifiable on-chain mechanisms."</em>
+                </p>
+            </div>
+
+            <div class="whitepaper-box">
+                <span class="whitepaper-title">2. Core Philosophy – Risk First</span>
+                <p>Dr Whale's primary focus is understanding risk, not predicting price.</p>
+                <ul style="padding-left: 1rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    <li><strong class="gold-text">Transparency:</strong> All token parameters are verifiable on the blockchain.</li>
+                    <li><strong class="gold-text">Fixed Supply & Mint Disabled:</strong> Zero inflation or additional minting.</li>
+                    <li><strong class="gold-text">Liquidity Safety:</strong> Ownership cannot manipulate LP, reducing rug pull risk.</li>
                 </ul>
             </div>
-            <div class="card">
-                <h3><i class="fas fa-network-wired gold-text"></i> Network</h3>
-                <br>
-                <p><strong>Blockchain:</strong> <span style="color: var(--accent-blue)">Solana</span></p>
-                <p>Chosen for high throughput, low transaction costs, and mature infrastructure.</p>
+
+            <div class="whitepaper-box">
+                <span class="whitepaper-title">3. Value for Users</span>
+                <p>
+                    <i class="fas fa-shield-alt gold-text"></i> <strong>Token Security:</strong> Clear & public structure.<br>
+                    <i class="fas fa-chart-bar gold-text"></i> <strong>Data-Driven:</strong> Dashboards & analytics to help understand logical risk.<br>
+                    <i class="fas fa-infinity gold-text"></i> <strong>Long-Term Mindset:</strong> No gimmicks, focus on sustainability.
+                </p>
             </div>
+
         </div>
 
         <div class="mt-2"></div>
@@ -462,13 +490,12 @@
             </div>
 
             <div class="card">
-                <h3>Scope & Intent</h3>
+                <h3>Highlights</h3>
                 <br>
-                <p><strong>Intended as:</strong> A long-term, low-complexity on-chain asset.</p>
-                <p><strong>Not:</strong> A get-rich-quick scheme or guaranteed investment.</p>
-                <div style="border-left: 3px solid var(--accent-gold); padding-left: 1rem; margin-top: 1rem;">
-                    <em style="color: #ccc; font-size: 0.9rem;">"Simple is the ultimate sophistication."</em>
-                </div>
+                <p><strong>Supply:</strong> 1,000,000,000 (Fixed)</p>
+                <p><strong>Blockchain:</strong> Solana</p>
+                <p><strong>Type:</strong> Fixed / No Tax</p>
+                <p style="font-size: 0.9rem;">All technical details are verifiable on the web / Solana explorer.</p>
             </div>
         </div>
 
@@ -523,15 +550,19 @@
             
             <p style="font-size: 1.1rem; line-height: 1.8; color: #fff; max-width: 800px; margin: 0 auto 1.5rem auto;">
                 Launch <span class="roadmap-arrow">→</span> 
-                Build Community <span class="roadmap-arrow">→</span> 
-                Simple Utility <span class="roadmap-arrow">→</span> 
+                Community Building <span class="roadmap-arrow">→</span> 
+                Transparency Metrics <span class="roadmap-arrow">→</span> 
                 Expansion <span class="roadmap-arrow">→</span> 
                 Sustainability
             </p>
             
-            <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 15px;">
-                Transparency first. No guaranteed profits. Always DYOR.
-            </p>
+            <div style="font-size: 0.9rem; color: var(--text-muted); text-align: left; max-width: 600px; margin: 2rem auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                <p><strong>Phase 1:</strong> Launch (Contract Verified & Live)</p>
+                <p><strong>Phase 2:</strong> Community Building (Risk Education)</p>
+                <p><strong>Phase 3:</strong> Transparency Metrics (Dashboard & Risk Data)</p>
+                <p><strong>Phase 4:</strong> Expansion (Features like WhaleDesk)</p>
+                <p><strong>Phase 5:</strong> Sustainability (Monitoring & Maintenance)</p>
+            </div>
         </div>
         <div class="mt-2"></div>
 
@@ -540,9 +571,9 @@
                 <i class="fas fa-exclamation-triangle gold-text"></i> Risk Notice
             </h3>
             <p style="font-size: 0.9rem; max-width: 700px; margin: 0 auto; line-height: 1.8;">
-                Dr Whale does not eliminate market risk. Price volatility remains possible. 
-                The project focuses only on reducing structural and control-related risks, not on price guarantees. 
-                Participation decisions should be based on independent assessment of on-chain data.
+                <strong>Market risk remains:</strong> This token only reduces structural risk, it does not guarantee profit.<br>
+                <strong>Investment Decision:</strong> Always based on your own research (DYOR). 
+                Dr Whale does not eliminate market volatility.
             </p>
         </div>
 
